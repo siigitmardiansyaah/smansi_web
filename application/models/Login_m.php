@@ -9,7 +9,7 @@ class Login_m extends CI_Model {
         return $response;
       }
     
- function login($nip,$password,$device) 
+ function login($nis,$password,$device) 
  {
     if(empty($nis) || empty($password))
     {
@@ -30,12 +30,19 @@ class Login_m extends CI_Model {
             $response['message']='Anda Login Di Device Yang Berbeda, Silahkan hubungi STAFF TU untuk memperbarui data Device';
             return $response;
         }else{
-            $this->db->where('nis',$nis);
-            $query1 = $this->db->get('tbsiswa')->result();
+            $this->db->join("tbkelas b","a.id_kelas = b.id_kelas");
+            $this->db->where('a.nis',$nis);
+            $query1 = $this->db->get('tbsiswa a')->row();
             if($query1){
                 $response['status']=200;
                 $response['error']=false;
-                $response['login']=$query1;
+                $response['login']=[
+                    'id_siswa' => $query1->id_siswa,
+                    'nis' => $query1->nis,
+                    'id_kelas' => $query1->id_kelas,
+                    'nama' =>$query1->nama,
+                    'nama_kelas' => $query1->nama_kelas
+                ];
                 return $response;
               }else{
                 $response['status']=502;
@@ -47,7 +54,7 @@ class Login_m extends CI_Model {
         }
     }
 
-    function register($nis, $device, $password){
+    function register($nis, $password, $device){
         if(empty($nis) || empty($password))
         {
             return $this->empty_response();
@@ -58,10 +65,10 @@ class Login_m extends CI_Model {
             {
                 $data = array(
                     'password' => $password,
-                    'device_id'  => $device_id,
+                    'device_id'  => $device,
                 );
                 $this->db->where('nis',$nis);
-                $query1 = $this->db->replace('table', $data);
+                $query1 = $this->db->update('tbsiswa', $data);
                 if($query1)
                 {
                     $response['status']=200;

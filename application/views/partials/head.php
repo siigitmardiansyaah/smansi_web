@@ -35,9 +35,5 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/atlantis.min.css') ?> ">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-<<<<<<< HEAD
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/demo.css') ?> ">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-=======
-	<link rel="stylesheet" href="<?php echo base_url('assets/css/demo.css') ?> ">
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c

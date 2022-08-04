@@ -16,7 +16,7 @@ class Register extends REST_Controller
             $nis = $this->input->post('nis');
             $device = $this->input->post('device_id');
             $password = md5($this->input->post('password'));
-            $response = $this->login_m->register($nis,$nama,$password,$device);
+            $response = $this->login_m->register($nis,$password,$device);
             $this->response($response);
     }
 }

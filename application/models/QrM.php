@@ -161,11 +161,7 @@ class QrM extends CI_Model {
       $this->db->where($data);
       $dataQr = $this->db->get("tbqr")->result_array();
       if (!empty($dataQr[0]['qr'])) {   
-<<<<<<< HEAD
         unlink($_SERVER['DOCUMENT_ROOT'].'/smansi_web/assets/qrimg/'.$dataQr[0]['qr'].".png");     
-=======
-        unlink($_SERVER['DOCUMENT_ROOT'].'/sensasiq/assets/qrimg/'.$dataQr[0]['qr'].".png");     
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
         $set['qr'] = substr($dataQr[0]['qr'],0,10).time();
         $whereupdate['id_qr'] = $dataQr[0]['id_qr'];
         $this->db->where($whereupdate);

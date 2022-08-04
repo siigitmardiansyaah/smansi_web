@@ -20,16 +20,18 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$long_smk = -6.253025502633878 *  0.0174532925;
-		$lang_smk = 107.06103869673028 *  0.0174532925;
-		$long_gps_d = -6.257362451100673 *  0.0174532925;
-		$lang_gps_d = 107.04019560964578 *  0.0174532925;
+		
+		$long_smk = -6.2530662 *  0.0174532925;
+		$lang_smk = 107.05885 *  0.0174532925;
+		$long_gps_d = -6.2530662 *  0.0174532925;
+		$lang_gps_d = 107.05885 *  0.0174532925;
 		$x = ($long_smk - $long_gps_d) * cos(($lang_smk-$lang_gps_d)/2);
 		$y = ($lang_smk - $lang_gps_d);
 		$jarak = sqrt(($x * $x) + ($y * $y)) * 6371;
 		$banding = floor($jarak * 1000);
-		if($banding > 500)
+		if($banding > 5)
 		{
+			echo $banding;
 			echo 'kelebihan boss';
 		}else{
 			echo 'absen berhasil';

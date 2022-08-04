@@ -207,7 +207,6 @@ class JadwalM extends CI_Model{
     $result = $this->db->get();
     return $result->result_array();
   }
-<<<<<<< HEAD
 
   function tampil_siswa($kelas,$nip)
   {
@@ -240,8 +239,6 @@ class JadwalM extends CI_Model{
     $this->db->insert('tbabsen', $data);
     return true;
   }
-=======
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 }
 
 ?>

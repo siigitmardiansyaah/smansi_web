@@ -85,7 +85,6 @@
 							</a>
 						</li>
 					</ul>
-<<<<<<< HEAD
 					<ul class="nav nav-primary">
 						<li class="nav-item <?php if($this->session->flashdata('activemenu') == 'koreksi_absen'): echo "active"; endif; ?>">
 							<a href="<?php echo base_url('koreksi_absen'); ?>">
@@ -94,7 +93,5 @@
 							</a>
 						</li>
 					</ul>
-=======
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 				</div>
 			</div>

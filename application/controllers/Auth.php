@@ -43,11 +43,7 @@ class Auth extends CI_Controller {
 	public function logout(){
 		if (!empty($this->session->file)) {
 		$un = $this->session->file;
-<<<<<<< HEAD
 		unlink($_SERVER['DOCUMENT_ROOT'].'/smansi_web/assets/qrimg/'.$un);
-=======
-		unlink($_SERVER['DOCUMENT_ROOT'].'/sensasiq/assets/qrimg/'.$un);
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 		}
 		
 		$this->session->sess_destroy();

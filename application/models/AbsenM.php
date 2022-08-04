@@ -13,8 +13,8 @@ class AbsenM extends CI_Model{
 
   // function untuk insert data ke tabel tbabsen
   public function add_absen($id_jadwal, $id_qr, $id_siswa,$long_gps,$lan_gps){
-    $long_smk = -6.253025502633878 *  0.0174532925;
-    $lang_smk = 107.06103869673028 *  0.0174532925;
+    $long_smk = -6.2530662 *  0.0174532925;
+    $lang_smk = 107.05885 *  0.0174532925;
     $long_gps_d = $long_gps *  0.0174532925;
     $lang_gps_d = $lan_gps *  0.0174532925;
     $x = ($long_smk - $long_gps_d) * cos(($lang_smk-$lang_gps_d)/2);
@@ -25,7 +25,7 @@ class AbsenM extends CI_Model{
     {
       $response['status']=502;
       $response['error']=true;
-      $response['message']='Jarak anda terlalu jauh untuk absen';
+      $response['message']="Jarak anda $banding Meter,terlalu jauh untuk absen";
       return $response;
     }else{
       $query1 = $this->db->query("SELECT * FROM tbjadwal where id_jadwal = $id_jadwal")->row();
@@ -35,16 +35,24 @@ class AbsenM extends CI_Model{
       $hari_ini = date('l');
       $jam_sekarang = date('H:i:s');
       $query = $this->db->query("SELECT * from tbabsen where id_jadwal = $id_jadwal AND id_qr = $id_qr AND id_siswa = $id_siswa")->num_rows();
-      if($query > 0)
+      if($query == 0)
       {
-      $response['status']=502;
-      $response['error']=true;
-      $response['message']='Anda Sudah Absen Sebelumnya';
-      return $response;
-      }else{
-        if($hari_ini == $hari && $jam_sekarang >= $jam_mulai && $jam_sekarang <= $jam_selesai1)
+      if($hari != $hari_ini){
+        $response['status']=502;
+        $response['error']=true;
+        $response['message']='Tidak Bisa Absen Dikarenakan Beda Hari';
+        return $response;
+      }else if($hari == $hari_ini && $jam_sekarang < $jam_mulai)
         {
-          $data = array(
+          $response['status']=502;
+          $response['error']=true;
+          $response['message']='Tidak Bisa Absen Dikarenakan  Kurang dari Jam Absen';
+          return $response;
+      }else if($hari == $hari_ini && $jam_sekarang > $jam_selesai1){
+        $response['status']=502;
+        $response['error']=true;
+        $response['message']='Tidak Bisa Absen Dikarenakan  Lebih dari Jam Absen';      }else if($hari == $hari_ini && $jam_sekarang > $jam_mulai && $jam_sekarang < $jam_selesai1){
+   $data = array(
             "id_jadwal"=>$id_jadwal,
             "id_qr"=>$id_qr,
             "id_siswa"=>$id_siswa,
@@ -63,15 +71,12 @@ class AbsenM extends CI_Model{
             $response['message']='Data absen gagal ditambahkan.';
             return $response;
           }
-        }else if($hari_ini != $hari){
-          $response['status']=502;
-          $response['error']=true;
-          $response['message']='Anda Absen di beda hari dengan mata pelajaran';
-        }else if($jam_sekarang <= $jam_mulai && $jam_sekarang >= $jam_selesai1){
-          $response['status']=502;
-          $response['error']=true;
-          $response['message']='Anda Belum Memasuki Jam Absen / Sudah Melewati Jam Absen';
-        }
+      }
+      }else{
+        $response['status']=502;
+        $response['error']=true;
+        $response['message']='Anda Sudah Absen Sebelumnya';
+        return $response;
       }
     }
   }

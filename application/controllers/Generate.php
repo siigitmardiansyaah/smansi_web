@@ -13,11 +13,7 @@ class Generate extends CI_Controller {
 	public function index()
 	{
 		if (!empty($this->session->file)) {
-<<<<<<< HEAD
 			unlink($_SERVER['DOCUMENT_ROOT'].'/smansi_web/assets/qrimg/'.$this->session->file);
-=======
-			unlink($_SERVER['DOCUMENT_ROOT'].'/sensasiq/assets/qrimg/'.$this->session->file);
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 			$this->session->unset_userdata('file');
 
 		}
@@ -38,12 +34,14 @@ class Generate extends CI_Controller {
 			WHERE tbjadwal.id_jadwal = $id_jadwal ORDER BY waktu ASC")->result_array();
 
 			$maxIDQR = $this->db->query("SELECT * FROM tbqr order by id_qr DESC")->row();
-			$id_qrnew = $maxIDQR->id_qr + 1;
+			
+				$id_qrnew = $maxIDQR->id_qr + 1;
+		
 
         	foreach ($data as $dataJadwal) :
 		      $datainsert = array(
 		        "nip" => $dataJadwal[0]['nip'],
-		        "qr"  => $qrRaw = $dataJadwal[0]['id_jadwal']."-".$id_qrnew."-".$dataJadwal[0]['nama_kelas']."-".$dataJadwal[0]['nip']."-".time()
+		        "qr"  => $qrRaw = $dataJadwal[0]['id_jadwal']."-".$id_qrnew."-".$dataJadwal[0]['nama_kelas']."-".$dataJadwal[0]['nip']."-".time()."-".$dataJadwal[0]['id_mapel']
 		      );
 		    endforeach;
 			$this->db->trans_complete();						
@@ -77,11 +75,7 @@ class Generate extends CI_Controller {
 	// 	        "qr"  => $qrRaw = $datanya[0]['qr'],		        
 	// 	    );
 	// 	endforeach;
-<<<<<<< HEAD
 	// 	$lokasiFileQr = $_SERVER['DOCUMENT_ROOT'].'/smansi_web/assets/qrimg/';		
-=======
-	// 	$lokasiFileQr = $_SERVER['DOCUMENT_ROOT'].'/sensasiq/assets/qrimg/';		
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 	// 	$file_name = $qrRaw.".png";
 	// 	$tempdir = $lokasiFileQr.$file_name;
 	// 	QRcode::png($qrRaw,$tempdir,QR_ECLEVEL_H,15,0);
