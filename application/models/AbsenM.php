@@ -64,7 +64,8 @@ class AbsenM extends CI_Model{
       }else if($hari == $hari_ini && $jam_sekarang > $jam_selesai1){
         $response['status']=502;
         $response['error']=true;
-        $response['message']='Tidak Bisa Absen Dikarenakan  Lebih dari Jam Absen';      }else if($hari == $hari_ini && $jam_sekarang > $jam_mulai && $jam_sekarang < $jam_selesai1){
+        $response['message']='Tidak Bisa Absen Dikarenakan  Lebih dari Jam Absen';      
+      }else if($hari == $hari_ini && $jam_sekarang > $jam_mulai && $jam_sekarang < $jam_selesai1){
    $data = array(
             "id_jadwal"=>$id_jadwal,
             "id_qr"=>$id_qr,
