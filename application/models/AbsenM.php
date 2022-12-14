@@ -13,14 +13,27 @@ class AbsenM extends CI_Model{
 
   // function untuk insert data ke tabel tbabsen
   public function add_absen($id_jadwal, $id_qr, $id_siswa,$long_gps,$lan_gps){
-    $long_smk = -6.2530662 *  0.0174532925;
-    $lang_smk = 107.05885 *  0.0174532925;
-    $long_gps_d = $long_gps *  0.0174532925;
-    $lang_gps_d = $lan_gps *  0.0174532925;
-    $x = ($long_smk - $long_gps_d) * cos(($lang_smk-$lang_gps_d)/2);
-    $y = ($lang_smk - $lang_gps_d);
-    $jarak = sqrt(($x * $x) + ($y * $y)) * 6371;
-		$banding = floor($jarak * 1000);
+    $radius_bumi = 6371;
+    // LOKASI USER
+      $lat_user =  ($lan_gps * 3.14) / 180;
+      $long_user = ($long_gps * 3.14) / 180;
+    // LOKASI USER
+
+    // LOKASI SEKOLAH
+      $lat_sekolah = (-6.256964621420829 * 3.14) / 180;
+      $long_sekolah = (107.04062740051258 * 3.14) / 180;
+    // LOKASI SEKOLAH
+
+    // RUMUS HARVERSINE
+      $lat = $lat_sekolah - ($lat_user);
+      $long = $long_sekolah - $long_user;
+      $a = (sin($lat / 2) * sin($lat / 2))  + cos($lat_user) * cos($lat_sekolah) * (sin($long/2) * sin($long/2));
+      $c = 2 * asin(sqrt($a));
+      $jarak = $radius_bumi * 2 * $c;
+      $banding = floor($jarak * 1000);
+    // RUMUS HARVERSINE
+
+
     if($banding > 5)
     {
       $response['status']=502;
