@@ -30,11 +30,11 @@ class AbsenM extends CI_Model{
       $a = (sin($lat / 2) * sin($lat / 2))  + cos($lat_user) * cos($lat_sekolah) * (sin($long/2) * sin($long/2));
       $c = 2 * asin(sqrt($a));
       $jarak = $radius_bumi * 2 * $c;
-      $banding = floor($jarak * 1000);
+      $banding = $jarak * 1000;
     // RUMUS HARVERSINE
 
 
-    if($banding > 5)
+    if($banding > 0.005)
     {
       $response['status']=502;
       $response['error']=true;

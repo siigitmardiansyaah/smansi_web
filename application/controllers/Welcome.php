@@ -21,20 +21,33 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		
-		$long_smk = -6.2530662 *  0.0174532925;
-		$lang_smk = 107.05885 *  0.0174532925;
-		$long_gps_d = -6.2530662 *  0.0174532925;
-		$lang_gps_d = 107.05885 *  0.0174532925;
-		$x = ($long_smk - $long_gps_d) * cos(($lang_smk-$lang_gps_d)/2);
-		$y = ($lang_smk - $lang_gps_d);
-		$jarak = sqrt(($x * $x) + ($y * $y)) * 6371;
-		$banding = floor($jarak * 1000);
-		if($banding > 5)
+		$radius_bumi = 6371;
+		// LOKASI USER
+		  $lat_user =  (-6.261882858762998 * 3.14) / 180;
+		  $long_user = (107.08366194158123 * 3.14) / 180;
+		// LOKASI USER
+	
+		// LOKASI SEKOLAH
+		  $lat_sekolah = (-6.257274282458042 * 3.14) / 180;
+		  $long_sekolah = (107.04022572816815 * 3.14) / 180;
+		// LOKASI SEKOLAH
+	
+		// RUMUS HARVERSINE
+		  $lat = $lat_sekolah - ($lat_user);
+		  $long = $long_sekolah - $long_user;
+		  $a = (sin($lat / 2) * sin($lat / 2))  + cos($lat_user) * cos($lat_sekolah) * (sin($long/2) * sin($long/2));
+		  $c = 2 * asin(sqrt($a));
+		  $jarak = $radius_bumi * 2 * $c;
+		  $banding = floor($jarak * 1000);
+		// RUMUS HARVERSINE
+
+		
+	
+		if($banding > 0.005)
 		{
-			echo $banding;
-			echo 'kelebihan boss';
+			echo 'Panjang Segini'.$banding;
 		}else{
-			echo 'absen berhasil';
+			echo 'Jauh segini'.$banding;
 		}
 	}
 }
