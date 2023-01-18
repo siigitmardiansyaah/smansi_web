@@ -39,10 +39,7 @@
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url('assets/js/setting-demo.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
-<<<<<<< HEAD
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-=======
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 
 
 	<!-- NOTIFIKASI SWEETALERT SERBAGUNA -->
@@ -159,12 +156,8 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
-<<<<<<< HEAD
 	</script>
 
 <script>
       $('#datetimepicker').datetimepicker();
     </script>
-=======
-	</script>
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c

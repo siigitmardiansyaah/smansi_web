@@ -21,7 +21,7 @@
 					<div class="page-inner py-5">
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
-								<h2 class="text-white pb-2 fw-bold">Koreksi Kehadiran Siswa</h2>
+								<h2 class="text-white pb-2 fw-bold">Tambah Kehadiran Siswa</h2>
 							</div>
 						</div>
 					</div>
@@ -32,32 +32,31 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">Koreksi Kehadiran Siswa</h4>
+										<h4 class="card-title">Tambah Kehadiran Siswa</h4>
 									</div>
 									<p class="card-category">
 									Memperbarui Absensi Siswa.</p>
 								</div>
 								<div class="card-body">
-									<form method="POST" action="<?php echo base_url('koreksi_absen/update') ?>">
+									<form method="POST" action="<?php echo base_url('koreksi_absen/add_update') ?>">
 									<div class="row">
 										<div class="col">
 											<div class="form-group">
-												<label>Nama Siswa</label>
-													<input type="text" class="form-control" name="nama" value="<?php echo $siswa->nama; ?>" readonly="readonly" />
-                                                    <input type="hidden" class="form-control" name="id_siswa" value="<?php echo $siswa->id_siswa; ?>" readonly="readonly" />
-                                                    <input type="hidden" class="form-control" name="id_jadwal" value="<?php echo $siswa->id_jadwal; ?>" readonly="readonly" />
-                                                    <input type="hidden" class="form-control" name="id_qr" value="<?php echo $siswa->id_qr; ?>" readonly="readonly" />
-											</div>
-											<div class="form-group">
-												<label for="exampleFormControlSelect1">Kelas</label>
-												<select class="form-control" name="id_jadwal" id="exampleFormControlSelect1" disabled>
-												<option value="">Pilih Kelas</option>
-													<?php foreach ($jadwal as $datajadwal) : ?>
-													<option value="<?php echo $datajadwal['id_jadwal']; ?>" <?php if($datajadwal['id_jadwal'] == $siswa->id_jadwal){echo 'selected';}?> ><?php echo $datajadwal['nama_mapel'].' - '.$datajadwal['nama_kelas']; ?></option>
+												<label for="exampleFormControlSelect1">Siswa</label>
+												<select class="form-control" name="id_siswa" id="exampleFormControlSelect1">
+												<option value="">Pilih Siswa</option>
+													<?php foreach ($siswa as $datajadwal) : ?>
+													<option value="<?php echo $datajadwal->id_siswa; ?>"><?php echo $datajadwal->nama ?></option>
 													<?php endforeach; ?>
 												</select>
 											</div>
-											</div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Mata Pelajaran</label>
+                                                    <input type="text" class="form-control" value="<?php echo $mapel->nama_mapel ?>" readonly>
+                                                    <input type="hidden" name="id_jadwal" class="form-control" value="<?php echo $mapel->id_jadwal ?>">
+                                                </div>
+                                                </div>
+
 										<div class="col">
 											<div class="form-group">
 												<label for="password">Pilih Tanggal dan Jam</label>
@@ -74,7 +73,7 @@
 												</select>
 											</div>
 											<div class="form-group float-right">
-												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Koreksi</button>
+												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Tambah Absen</button>
 												<span style="padding: 5px"></span>
 												<input type="button" class="btn btn-primary btn-border" onclick="location.href='<?php echo base_url(`koreksi_absen`) ?>';" value="Batal">
 											</div>

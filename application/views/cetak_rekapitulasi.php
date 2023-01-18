@@ -10,7 +10,7 @@
     <div class="container-fluid">
     <div class="card mb-3">
             <div class="card-header">             
-              Rekap nilai kelas <strong><?php echo $cetak[0]['kelas'] ?></strong>
+              Rekap nilai kelas <strong><?php echo $kelas->nama_kelas ?></strong>
                 </div>    
            <div class="card">
             <div class="card-body">
@@ -19,18 +19,18 @@
                   <thead>
                     <tr>                      
                       <th>Waktu</th>
-                      <th>nis</th>
+                      <th>Nis</th>
                       <th>Nama</th>
-                      <th>Mata Kuliah</th>
+                      <th>Mata Pelajaran</th>
                       <th>Kelas</th>                      
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>                      
                       <th>Waktu</th>
-                      <th>nis</th>
+                      <th>Nis</th>
                       <th>Nama</th>
-                      <th>Mata Kuliah</th>
+                      <th>Mata Pelajaran</th>
                       <th>Kelas</th>
                     </tr>
                   </tfoot>

@@ -44,7 +44,7 @@
 											<thead>
 												<tr>
 													<th>Waktu</th>
-													<th>nis</th>
+													<th>NIS</th>
 													<th>Nama</th>
 													<th>Mata Pelajaran</th>
 													<th>Kelas</th>													
@@ -53,7 +53,7 @@
 											<tfoot>
 												<tr>
 													<th>Waktu</th>
-													<th>nis</th>
+													<th>NIS</th>
 													<th>Nama</th>
 													<th>Mata Kuliah</th>
 													<th>Kelas</th>													

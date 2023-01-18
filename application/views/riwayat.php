@@ -57,7 +57,7 @@
 											<tbody>
 												<?php foreach ($riwayat as $datajadwal) : ?>
 												<tr>
-													<td><?php echo $datajadwal['waktu_absen']; ?></td>
+													<td><?php echo $datajadwal['waktu_buat']; ?></td>
 								                    <td><?php echo $datajadwal['nama_mapel']; ?></td>
 								                    <td><?php echo $datajadwal['nama_kelas']; ?></td>
 												</tr>

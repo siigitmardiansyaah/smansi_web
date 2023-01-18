@@ -66,6 +66,7 @@
 												<h4><?php echo $this->session->nama_guru; ?></h4>
 												<a href="<?php echo base_url('profil'); ?>" class="btn btn-xs btn-secondary btn-sm">Edit Profil</a>
 											</div>
+											
 										</div>
 									</li>
 									<li>

@@ -26,22 +26,26 @@ class GenerateAdmin extends CI_Controller {
 		$id_jadwal = $this->input->post('id_jadwal');
 		if (!empty($id_jadwal)) {
 			$this->db->trans_start();			
-        	$data['datajadwal'] = $this->db->query("SELECT tbjadwal.id_jadwal as id_jadwal, tbjadwal.nip as nip, tbjadwal.waktu as waktu, tbkelas.nama_kelas as nama_kelas, tbmapel.nama_mapel as nama_mapel, tbmapel.id_mapel as id_mapel
+        	$data['datajadwal'] = $this->db->query("SELECT tbjadwal.id_jadwal as id_jadwal, tbjadwal.id_guru as id_guru, tbjadwal.waktu as waktu, tbkelas.nama_kelas as nama_kelas, tbmapel.nama_mapel as nama_mapel, tbmapel.id_mapel as id_mapel
 			FROM tbjadwal
 			JOIN tbkelas ON tbkelas.id_kelas = tbjadwal.id_kelas
-			JOIN tbguru ON tbguru.nip = tbjadwal.nip
+			JOIN tbguru ON tbguru.id_guru = tbjadwal.id_guru
 			JOIN tbmapel ON tbmapel.id_mapel = tbjadwal.id_mapel
 			WHERE tbjadwal.id_jadwal = $id_jadwal ORDER BY waktu ASC")->result_array();
 
 			$maxIDQR = $this->db->query("SELECT * FROM tbqr order by id_qr DESC")->row();
 			
+			if(empty($maxIDQR)) {
+				$id_qrnew = 1;
+			}else{
 				$id_qrnew = $maxIDQR->id_qr + 1;
+			}
 		
 
         	foreach ($data as $dataJadwal) :
 		      $datainsert = array(
-		        "nip" => $dataJadwal[0]['nip'],
-		        "qr"  => $qrRaw = $dataJadwal[0]['id_jadwal']."-".$id_qrnew."-".$dataJadwal[0]['nama_kelas']."-".$dataJadwal[0]['nip']."-".time()."-".$dataJadwal[0]['id_mapel']
+		        "id_guru" => $dataJadwal[0]['id_guru'],
+		        "qr"  => $qrRaw = $dataJadwal[0]['id_jadwal']."-".$id_qrnew."-".$dataJadwal[0]['nama_kelas']."-".$dataJadwal[0]['id_guru']."-".time()."-".$dataJadwal[0]['id_mapel']
 		      );
 		    endforeach;
 			$this->db->trans_complete();						
@@ -61,31 +65,5 @@ class GenerateAdmin extends CI_Controller {
 			redirect('generateadmin');
 		}
 	}
-
-	// public function generated_refresh($qr){			
-	// 	$data = array(
-	// 		"nip"	=>	$this->session->nip,
-	// 		"qr"	=>	$qr
-	// 	);
-
-	// 	$dataQr['dataQr'] = $this->QrM->updateQr($data);			
-	// 	foreach ($dataQr as $datanya) :
-	// 	    $dataku = array(
-	// 	        "nip" => $datanya[0]['nip'],
-	// 	        "qr"  => $qrRaw = $datanya[0]['qr'],		        
-	// 	    );
-	// 	endforeach;
-	// 	$lokasiFileQr = $_SERVER['DOCUMENT_ROOT'].'/smansi_web/assets/qrimg/';		
-	// 	$file_name = $qrRaw.".png";
-	// 	$tempdir = $lokasiFileQr.$file_name;
-	// 	QRcode::png($qrRaw,$tempdir,QR_ECLEVEL_H,15,0);
-	// 	$infoQr = array(
-	// 		"fileQr"	=> $file_name,
-	// 		"qr"		=> $qrRaw,
-	// 	);
-	// 	$session['file'] = $file_name;
-	// 	$this->session->set_userdata($session);
-	// 	$this->load->view('generated_qr_img', $infoQr);
-	// }
 	
 }

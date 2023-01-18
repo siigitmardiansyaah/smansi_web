@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2023 at 09:36 AM
+-- Generation Time: Jan 18, 2023 at 07:25 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -41,8 +41,8 @@ CREATE TABLE `tbabsen` (
 --
 
 INSERT INTO `tbabsen` (`id_absen`, `id_jadwal`, `id_qr`, `id_siswa`, `waktu_absen`, `keterangan`) VALUES
-(51, 24, 102, 3, '2022-08-05 05:14:05', 'Hadir'),
-(60, 24, 103, 3, '2023-01-15 20:12:00', 'Hadir');
+(65, 26, 106, 5, '2023-01-18 07:00:00', 'Sakit'),
+(70, 26, 106, 6, '2023-01-18 06:24:00', 'Hadir');
 
 -- --------------------------------------------------------
 
@@ -51,7 +51,8 @@ INSERT INTO `tbabsen` (`id_absen`, `id_jadwal`, `id_qr`, `id_siswa`, `waktu_abse
 --
 
 CREATE TABLE `tbguru` (
-  `nip` int(20) NOT NULL,
+  `id_guru` int(11) NOT NULL,
+  `nip` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_guru` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -60,8 +61,9 @@ CREATE TABLE `tbguru` (
 -- Dumping data for table `tbguru`
 --
 
-INSERT INTO `tbguru` (`nip`, `nama_guru`, `password`) VALUES
-(1, 'Guru Wijanarko', '098f6bcd4621d373cade4e832627b4f6');
+INSERT INTO `tbguru` (`id_guru`, `nip`, `nama_guru`, `password`) VALUES
+(1, 'B0001', 'Guruh Wijanarko S.PD', '098f6bcd4621d373cade4e832627b4f6'),
+(2, 'B0002', 'Neneng Wijanarsih', '098f6bcd4621d373cade4e832627b4f6');
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,7 @@ CREATE TABLE `tbjadwal` (
   `id_jadwal` int(20) NOT NULL,
   `id_mapel` int(20) NOT NULL,
   `id_kelas` int(20) NOT NULL,
-  `nip` int(20) NOT NULL,
+  `id_guru` int(20) NOT NULL,
   `waktu` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -81,9 +83,8 @@ CREATE TABLE `tbjadwal` (
 -- Dumping data for table `tbjadwal`
 --
 
-INSERT INTO `tbjadwal` (`id_jadwal`, `id_mapel`, `id_kelas`, `nip`, `waktu`) VALUES
-(24, 16, 8, 1, '2022-08-08 14:45:00'),
-(25, 15, 8, 1, '2023-01-09 14:45:00');
+INSERT INTO `tbjadwal` (`id_jadwal`, `id_mapel`, `id_kelas`, `id_guru`, `waktu`) VALUES
+(26, 19, 12, 1, '2023-01-18 21:00:00');
 
 -- --------------------------------------------------------
 
@@ -102,9 +103,8 @@ CREATE TABLE `tbjadwal_siswa` (
 --
 
 INSERT INTO `tbjadwal_siswa` (`id_jadwalsiswa`, `id_siswa`, `id_jadwal_guru`) VALUES
-(3, 3, 24),
-(4, 4, 24),
-(5, 4, 24);
+(6, 5, 26),
+(7, 6, 26);
 
 -- --------------------------------------------------------
 
@@ -122,8 +122,8 @@ CREATE TABLE `tbkelas` (
 --
 
 INSERT INTO `tbkelas` (`id_kelas`, `nama_kelas`) VALUES
-(8, 'TKJ 1'),
-(9, 'TKJ 2');
+(11, '10 TKJ 2'),
+(12, '10 TKJ 1');
 
 -- --------------------------------------------------------
 
@@ -141,8 +141,8 @@ CREATE TABLE `tbmapel` (
 --
 
 INSERT INTO `tbmapel` (`id_mapel`, `nama_mapel`) VALUES
-(15, 'Pemograman Komputer'),
-(16, 'Algoritma Dasar');
+(18, 'IPA'),
+(19, 'IPS');
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,7 @@ INSERT INTO `tbmapel` (`id_mapel`, `nama_mapel`) VALUES
 
 CREATE TABLE `tbqr` (
   `id_qr` int(80) NOT NULL,
-  `nip` int(20) NOT NULL,
+  `id_guru` int(20) NOT NULL,
   `qr` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `waktu_buat` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -161,20 +161,8 @@ CREATE TABLE `tbqr` (
 -- Dumping data for table `tbqr`
 --
 
-INSERT INTO `tbqr` (`id_qr`, `nip`, `qr`, `waktu_buat`) VALUES
-(91, 1, '24-1-TKJ 1-1-1659620576', '2022-08-04 13:42:57'),
-(92, 1, '24-92-TKJ 1-1-1659620656', '2022-08-04 13:44:16'),
-(93, 1, '24-93-TKJ 1-1-1659620701', '2022-08-04 13:45:01'),
-(94, 1, '24-94-TKJ 1-1-1659620716', '2022-08-04 13:45:16'),
-(95, 1, '24-95-TKJ 1-1-1659622342-16', '2022-08-04 14:12:22'),
-(96, 1, '24-96-TKJ 1-1-1659626106-16', '2022-08-04 15:15:06'),
-(97, 1, '24-97-TKJ 1-1-1659626183-16', '2022-08-04 15:16:23'),
-(98, 1, '24-98-TKJ 1-1-1659627372-16', '2022-08-04 15:36:12'),
-(99, 1, '24-99-TKJ 1-1-1659627543-16', '2022-08-04 15:39:03'),
-(100, 1, '24-100-TKJ 1-1-1659627989-16', '2022-08-04 15:46:29'),
-(101, 1, '24-101-TKJ 1-1-1659628061-16', '2022-08-04 15:47:41'),
-(102, 1, '24-102-TKJ 1-1-1659632511-16', '2022-12-14 02:00:00'),
-(103, 1, '24-103-TKJ 1-1-1673854274-16', '2023-01-16 07:31:14');
+INSERT INTO `tbqr` (`id_qr`, `id_guru`, `qr`, `waktu_buat`) VALUES
+(106, 1, '26-106-10 TKJ 1-1-1674018385-19', '2023-01-18 05:06:25');
 
 -- --------------------------------------------------------
 
@@ -184,7 +172,7 @@ INSERT INTO `tbqr` (`id_qr`, `nip`, `qr`, `waktu_buat`) VALUES
 
 CREATE TABLE `tbsiswa` (
   `id_siswa` int(11) NOT NULL,
-  `nis` int(20) NOT NULL,
+  `nis` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `device_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -197,8 +185,8 @@ CREATE TABLE `tbsiswa` (
 --
 
 INSERT INTO `tbsiswa` (`id_siswa`, `nis`, `nama`, `password`, `device_id`, `id_kelas`, `no_wa`) VALUES
-(3, 1, 'Sigit Mardiansyah', '098f6bcd4621d373cade4e832627b4f6', 'd9c84cb1d7681ebb', 8, '081213925602'),
-(4, 2, 'Yongki Herdiansah', '', NULL, 8, '');
+(5, 'K0001', 'Sigit Mardiansyah', '', NULL, 12, '081213925602'),
+(6, 'K0002', 'Yongki Herdiansah', '', NULL, 12, '082210553717');
 
 --
 -- Indexes for dumped tables
@@ -217,7 +205,7 @@ ALTER TABLE `tbabsen`
 -- Indexes for table `tbguru`
 --
 ALTER TABLE `tbguru`
-  ADD PRIMARY KEY (`nip`);
+  ADD PRIMARY KEY (`id_guru`);
 
 --
 -- Indexes for table `tbjadwal`
@@ -226,7 +214,7 @@ ALTER TABLE `tbjadwal`
   ADD PRIMARY KEY (`id_jadwal`),
   ADD KEY `id_matkul` (`id_mapel`),
   ADD KEY `id_kelas` (`id_kelas`),
-  ADD KEY `nip` (`nip`);
+  ADD KEY `nip` (`id_guru`);
 
 --
 -- Indexes for table `tbjadwal_siswa`
@@ -253,7 +241,7 @@ ALTER TABLE `tbmapel`
 --
 ALTER TABLE `tbqr`
   ADD PRIMARY KEY (`id_qr`),
-  ADD KEY `nip` (`nip`);
+  ADD KEY `nip` (`id_guru`);
 
 --
 -- Indexes for table `tbsiswa`
@@ -270,43 +258,49 @@ ALTER TABLE `tbsiswa`
 -- AUTO_INCREMENT for table `tbabsen`
 --
 ALTER TABLE `tbabsen`
-  MODIFY `id_absen` int(80) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_absen` int(80) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT for table `tbguru`
+--
+ALTER TABLE `tbguru`
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbjadwal`
 --
 ALTER TABLE `tbjadwal`
-  MODIFY `id_jadwal` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_jadwal` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbjadwal_siswa`
 --
 ALTER TABLE `tbjadwal_siswa`
-  MODIFY `id_jadwalsiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_jadwalsiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbkelas`
 --
 ALTER TABLE `tbkelas`
-  MODIFY `id_kelas` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kelas` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbmapel`
 --
 ALTER TABLE `tbmapel`
-  MODIFY `id_mapel` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_mapel` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbqr`
 --
 ALTER TABLE `tbqr`
-  MODIFY `id_qr` int(80) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id_qr` int(80) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `tbsiswa`
 --
 ALTER TABLE `tbsiswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -324,9 +318,9 @@ ALTER TABLE `tbabsen`
 -- Constraints for table `tbjadwal`
 --
 ALTER TABLE `tbjadwal`
+  ADD CONSTRAINT `tbguru_ibfk_3` FOREIGN KEY (`id_guru`) REFERENCES `tbguru` (`id_guru`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbjadwal_ibfk_1` FOREIGN KEY (`id_mapel`) REFERENCES `tbmapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbjadwal_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `tbkelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbjadwal_ibfk_3` FOREIGN KEY (`nip`) REFERENCES `tbguru` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbjadwal_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `tbkelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbjadwal_siswa`
@@ -339,7 +333,7 @@ ALTER TABLE `tbjadwal_siswa`
 -- Constraints for table `tbqr`
 --
 ALTER TABLE `tbqr`
-  ADD CONSTRAINT `tbqr_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `tbguru` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbguru1` FOREIGN KEY (`id_guru`) REFERENCES `tbguru` (`id_guru`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbsiswa`

@@ -144,11 +144,11 @@ class DosenM extends CI_Model{
 
   // update profil
   public function update_profil($data, $nip){
-    $this->db->where('nip', $nip);
+    $this->db->where('id_guru', $nip);
     $exec = $this->db->update("tbguru", $data);
     if ($exec) {
-      $this->session->unset_userdata('nama_dosen');
-      $this->session->set_userdata('nama_dosen', $data['nama_dosen']);
+      $this->session->unset_userdata('nama_guru');
+      $this->session->set_userdata('nama_guru', $data['nama_guru']);
     }
   }
 

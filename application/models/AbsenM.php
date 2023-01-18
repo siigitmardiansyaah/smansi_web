@@ -156,10 +156,10 @@ class AbsenM extends CI_Model{
     if($nis == ''){
       return $this->empty_response();
     }else{
-      $this->db->select('tbabsen.waktu_absen_absen as waktu, tbmapel.nama_mapel as nama_mapel, tbguru.nama_dosen as nama_dosen');
+      $this->db->select('tbabsen.waktu_absen_absen as waktu, tbmapel.nama_mapel as nama_mapel, tbguru.nama_guru as nama_dosen');
       $this->db->from('tbjadwal');
       $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');
-      $this->db->join('tbguru', 'tbguru.nip = tbjadwal.nip');
+      $this->db->join('tbguru', 'tbguru.id_guru = tbjadwal.id_guru');
       $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');
       $this->db->join('tbabsen','tbabsen.id_jadwal = tbjadwal.id_jadwal');
       $this->db->join('tbsiswa', 'tbsiswa.nis = tbabsen.id_siswa');
@@ -260,26 +260,26 @@ class AbsenM extends CI_Model{
 
   //riwayat generate qr
    public function tampil_riwayat($nip){    
-    $this->db->select('tbmapel.nama_mapel, tbabsen.waktu_absen, tbkelas.nama_kelas');
+    $this->db->select('tbmapel.nama_mapel, tbqr.waktu_buat, tbkelas.nama_kelas');
     $this->db->from('tbjadwal');
-    $this->db->group_by('tbabsen.id_qr');    
+    $this->db->group_by('tbqr.id_qr');    
     $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');
     $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');
-    $this->db->join('tbabsen','tbabsen.id_jadwal = tbjadwal.id_jadwal');
-    $this->db->where('tbjadwal.nip',$nip);
+    $this->db->join('tbqr','tbqr.id_guru = tbjadwal.id_guru');
+    $this->db->where('tbjadwal.id_guru',$nip);
     $result = $this->db->get();
     return $result->result_array();
   }
 
   public function riwayat_generate($nip){
-    $this->db->select('tbjadwal.nip as nip,tbmapel.nama_mapel as matkul, tbabsen.waktu_absen as waktu');
+    $this->db->select('tbjadwal.id_guru as nip,tbmapel.nama_mapel as matkul, tbabsen.waktu_absen as waktu');
     $this->db->from('tbjadwal');      
     $this->db->group_by('tbabsen.id_qr');
     $this->db->order_by('tbabsen.id_absen','desc');
     $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');
     $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');
     $this->db->join('tbabsen','tbabsen.id_jadwal = tbjadwal.id_jadwal');
-    $this->db->where('tbjadwal.nip',$nip);
+    $this->db->where('tbjadwal.id_guru',$nip);
     $result = $this->db->limit(5,0)->get();
     return $result->result_array();
   }
@@ -291,21 +291,18 @@ class AbsenM extends CI_Model{
     $this->db->join('tbjadwal','tbabsen.id_jadwal = tbjadwal.id_jadwal');    
     $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');  
     $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');
-    $this->db->join('tbsiswa','tbsiswa.nis = tbabsen.id_siswa'); 
-    $this->db->where('tbjadwal.nip',$nip);
+    $this->db->join('tbsiswa','tbsiswa.id_siswa = tbabsen.id_siswa'); 
+    $this->db->where('tbjadwal.id_guru',$nip);
     $result = $this->db->get();
     return $result->result_array();
   }
 
   public function info_kelas($nip){
     $this->db->select('tbjadwal.id_kelas as id,tbkelas.nama_kelas as kelas');
-    $this->db->from('tbabsen');
-    $this->db->group_by('tbkelas.nama_kelas');          
-    $this->db->join('tbjadwal','tbabsen.id_jadwal = tbjadwal.id_jadwal');    
+    $this->db->from('tbjadwal');
     $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');  
     $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');
-    $this->db->join('tbsiswa','tbsiswa.nis = tbabsen.id_siswa'); 
-    $this->db->where('tbjadwal.nip',$nip);
+    $this->db->where('tbjadwal.id_guru',$nip);
     $result = $this->db->get();
     return $result->result_array();
   }
@@ -319,9 +316,9 @@ class AbsenM extends CI_Model{
     $this->db->join('tbjadwal','tbabsen.id_jadwal = tbjadwal.id_jadwal');    
     $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');  
     $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');
-    $this->db->join('tbsiswa','tbsiswa.nis = tbabsen.id_siswa'); 
+    $this->db->join('tbsiswa','tbsiswa.id_siswa = tbabsen.id_siswa'); 
     $this->db->where('tbjadwal.id_kelas',$kelas);
-    $this->db->where('tbjadwal.nip',$this->session->nip);
+    $this->db->where('tbjadwal.id_guru',$this->session->id_guru);
     $result = $this->db->get();
     return $result->result_array();
     }

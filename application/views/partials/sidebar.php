@@ -125,9 +125,9 @@
 									$this->db->select('*');
 								    $this->db->from('tbjadwal');
 								    $this->db->join('tbkelas', 'tbkelas.id_kelas = tbjadwal.id_kelas');
-								    $this->db->join('tbguru', 'tbguru.nip = tbjadwal.nip');
+								    $this->db->join('tbguru', 'tbguru.id_guru = tbjadwal.id_guru');
 								    $this->db->join('tbmapel', 'tbmapel.id_mapel = tbjadwal.id_mapel');
-								    $this->db->where('tbjadwal.nip', $this->session->nip);
+								    $this->db->where('tbjadwal.id_guru', $this->session->id_guru);
 								    $result = $this->db->get();
 								    echo $result->num_rows();
 									?>

@@ -42,7 +42,7 @@
 														</div>
 														<div class="col-7 col-stats">
 															<div class="numbers">
-																<p class="card-category">Siswa</p>
+																<a href="<?php echo base_url('siswa')?>"><p class="card-category">Siswa</p></a>
 																<h4 class="card-title"><?php  echo $siswa ?></h4>
 															</div>
 														</div>
@@ -61,7 +61,7 @@
 														</div>
 														<div class="col-7 col-stats">
 															<div class="numbers">
-																<p class="card-category">Kelas</p>
+															<a href="<?php echo base_url('kelas')?>"><p class="card-category">Kelas</p></a>
 																<h4 class="card-title"><?php  echo $kelas ?></h4>														
 															</div>
 														</div>
@@ -80,7 +80,7 @@
 														</div>
 														<div class="col-7 col-stats">
 															<div class="numbers">
-																<p class="card-category">Mata Pelajaran</p>
+															<a href="<?php echo base_url('mapel')?>"><p class="card-category">Mata Pelajaran</p></a>
 																<h4 class="card-title"><?php  echo $mapel ?></h4>
 															</div>
 														</div>
@@ -99,7 +99,7 @@
 														</div>
 														<div class="col-7 col-stats">
 															<div class="numbers">
-																<p class="card-category">Guru</p>
+															<a href="<?php echo base_url('guru')?>"><p class="card-category">Guru</p></a>
 																<h4 class="card-title"><?php  echo $guru ?></h4>
 															</div>
 														</div>
@@ -126,11 +126,7 @@
 		$.notify({
 			icon: 'flaticon-alarm-1',
 			title: 'Halo, <?php echo $this->session->nama_dosen ?>!',
-<<<<<<< HEAD
 			message: 'Selamat datang di SMANSI WEB',
-=======
-			message: 'Selamat datang di SENSASIQ',
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 		},{
 			type: 'info',
 			placement: {

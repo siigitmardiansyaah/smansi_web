@@ -32,7 +32,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">Informasi Akun</h4>
+										<h4 class="card-title">Informasi Guru</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -41,7 +41,8 @@
 										<div class="col">
 											<div class="form-group">
 												<label>Nomor Induk Pegawai</label>
-													<input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai" value="<?php echo $guru->nip?>" readonly/>
+													<input type="hidden" class="form-control" name="id" placeholder="Nomor Induk Pegawai" value="<?php echo $guru->id_guru?>" readonly/>
+													<input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai" value="<?php echo $guru->nip?>"/>
 											</div>
 											<div class="form-group">
 												<label>Nama Lengkap</label>

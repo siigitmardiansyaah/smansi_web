@@ -18,7 +18,7 @@ class Jadwal extends CI_Controller {
 	function add() {
 		$data['kelas'] = $this->db->query('SELECT * FROM tbkelas order by id_kelas asc')->result();
 		$data['mapel'] = $this->db->query('SELECT * FROM tbmapel order by id_mapel asc')->result();
-		$data['guru'] = $this->db->query('SELECT * FROM tbguru order by nip asc')->result();
+		$data['guru'] = $this->db->query('SELECT * FROM tbguru order by id_guru asc')->result();
 		$this->session->set_flashdata('activemenu','jadwal');
 		$this->load->view('jadwal_add',$data);
 	}
@@ -31,7 +31,7 @@ class Jadwal extends CI_Controller {
 		$data = array(
 			'id_mapel' => $id_mapel,
 			'id_kelas' => $id_kelas,
-            'nip' => $nip,
+            'id_guru' => $nip,
             'waktu' => $waktu
 		);
 			$query = $this->jadwal_m->insert($data);
@@ -49,7 +49,7 @@ class Jadwal extends CI_Controller {
 		$data['guru1'] = $this->jadwal_m->getGuruProfile($id);
         $data['kelas'] = $this->db->query('SELECT * FROM tbkelas order by id_kelas asc')->result();
 		$data['mapel'] = $this->db->query('SELECT * FROM tbmapel order by id_mapel asc')->result();
-		$data['guru'] = $this->db->query('SELECT * FROM tbguru order by nip asc')->result();
+		$data['guru'] = $this->db->query('SELECT * FROM tbguru order by id_guru asc')->result();
         $this->session->set_flashdata('activemenu','jadwal');
  	   	$this->load->view('jadwal_edit',$data);
 	}
@@ -63,7 +63,7 @@ class Jadwal extends CI_Controller {
 		$data = array(
 			'id_mapel' => $id_mapel,
 			'id_kelas' => $id_kelas,
-            'nip' => $nip,
+            'id_guru' => $nip,
             'waktu' => $waktu
 		);
 			$query = $this->jadwal_m->update($data,$id);
@@ -99,7 +99,7 @@ class Jadwal extends CI_Controller {
     function add_siswa() {
         $data['siswa'] = $this->db->query('SELECT * FROM tbsiswa order by id_siswa asc')->result();
 		$data['kelas'] = $this->db->query('SELECT a.*,b.*,c.*,d.* FROM tbjadwal a 
-        join tbguru b on a.nip = b.nip 
+        join tbguru b on a.id_guru = b.id_guru 
         join tbmapel c on a.id_mapel = c.id_mapel 
         join tbkelas d on a.id_kelas = d.id_kelas order by a.id_jadwal asc')->result();
 		$this->session->set_flashdata('activemenu','jadwal_siswa');
@@ -128,7 +128,7 @@ class Jadwal extends CI_Controller {
 		$data['guru1'] = $this->jadwal_m->getGuruProfile1($id);
         $data['siswa'] = $this->db->query('SELECT * FROM tbsiswa order by id_siswa asc')->result();
 		$data['kelas'] = $this->db->query('SELECT a.*,b.*,c.*,d.* FROM tbjadwal a 
-        join tbguru b on a.nip = b.nip 
+        join tbguru b on a.id_guru = b.id_guru 
         join tbmapel c on a.id_mapel = c.id_mapel 
         join tbkelas d on a.id_kelas = d.id_kelas order by a.id_jadwal asc')->result();
         $this->session->set_flashdata('activemenu','jadwal_siswa');

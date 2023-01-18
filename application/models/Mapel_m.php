@@ -22,7 +22,7 @@ class Mapel_m extends CI_Model {
 
     function getGuruProfile($id){
         $this->db->where('id_mapel',$id);
-        $result = $this->db->get('tb_kelas')->row(); // Untuk mengeksekusi dan mengambil data hasil query
+        $result = $this->db->get('tbmapel')->row(); // Untuk mengeksekusi dan mengambil data hasil query
         return $result;
     }
 

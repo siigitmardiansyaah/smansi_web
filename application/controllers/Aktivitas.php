@@ -11,7 +11,7 @@ class Aktivitas extends CI_Controller {
 	public function index()
 	{
 		$this->session->set_flashdata('activemenu','aktivitas');
-		$data['jadwal'] = $this->JadwalM->tampil_jadwal($this->session->nip);
+		$data['jadwal'] = $this->JadwalM->tampil_jadwal($this->session->id_guru);
     	$this->load->view('aktivitas', $data);
 	}
 

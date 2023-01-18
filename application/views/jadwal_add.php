@@ -44,7 +44,7 @@
                                                 <select name="nip" id="nip" class="form-control">
                                                     <option value="">Pilih Guru</option>
                                                     <?php foreach ($guru as $ke) : ?>
-                                                        <option value="<?php echo $ke->nip ?>"><?php echo $ke->nama_guru ?></option>
+                                                        <option value="<?php echo $ke->id_guru ?>"><?php echo $ke->nama_guru ?></option>
                                                     <?php endforeach; ?>
                                                 </select>											
                                             </div>
@@ -74,7 +74,7 @@
 											</div>
 										<div class="col">
 											<div class="form-group float-right">
-												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Ubah</button>
+												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Save</button>
 												<span style="padding: 5px"></span>
 											</div>
 										</div>

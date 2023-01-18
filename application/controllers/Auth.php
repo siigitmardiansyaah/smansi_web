@@ -22,10 +22,11 @@ class Auth extends CI_Controller {
 		
 		if(empty($user)){ 
 			if($nip === 'admin') {
-				if($password === md5('nop4ssword')) {
+				if($password === md5('test')) {
 					$session_admin = array(
 						'authenticated'	=>	TRUE, 
 						'username'			=>	'admin',
+						'role'	=> 'admin'
 					);
 					$this->session->set_userdata($session_admin);
 					redirect('admin');
@@ -41,9 +42,12 @@ class Auth extends CI_Controller {
     	} else {
     		if($password == $user->password){ 
         	$session = array(
-        		'authenticated'	=>	TRUE, 
+        		'authenticated'	=>	TRUE,
+				'id_guru'		=> $user->id_guru, 
         		'nip'			=>	$user->nip,
-        		'nama_guru'	=>	$user->nama_guru
+        		'nama_guru'	=>	$user->nama_guru,
+				'role'	=> 'guru'
+
         	);
 
 	        $this->session->set_userdata($session);

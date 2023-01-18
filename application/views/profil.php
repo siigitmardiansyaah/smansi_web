@@ -47,7 +47,7 @@
 											</div>
 											<div class="form-group">
 												<label>Nama Lengkap</label>
-												<input type="text" class="form-control" name="nama_dosen" value="<?php echo $this->session->nama_dosen; ?>" >
+												<input type="text" class="form-control" name="nama_dosen" value="<?php echo $this->session->nama_guru; ?>" >
 											</div>
 
 											</div>

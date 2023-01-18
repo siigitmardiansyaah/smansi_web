@@ -21,7 +21,7 @@ class Guru_m extends CI_Model {
     }
 
     function getGuruProfile($id){
-        $this->db->where('nip',$id);
+        $this->db->where('id_guru',$id);
         $result = $this->db->get('tbguru')->row(); // Untuk mengeksekusi dan mengambil data hasil query
         return $result;
     }
@@ -29,7 +29,7 @@ class Guru_m extends CI_Model {
     public function update($data, $id)
     {
       $this->db->trans_start();
-      $this->db->where('nip', $id);
+      $this->db->where('id_guru', $id);
      $query =  $this->db->update("tbguru", $data);
       $this->db->trans_complete();
 
@@ -41,7 +41,7 @@ class Guru_m extends CI_Model {
     }
 
     function hapus($id) {
-        $this->db->where('nip',$id);
+        $this->db->where('id_guru',$id);
         $query = $this->db->delete('tbguru');
         if($query) {
             return true;

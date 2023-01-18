@@ -53,7 +53,7 @@
 											<tfoot>
 												<tr>
                                                     <th>No</th>
-													<th>Nama Guru</th>
+													<th>Nama Kelas</th>
 													<th>Action</th>
 												</tr>
 											</tfoot>

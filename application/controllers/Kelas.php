@@ -37,7 +37,7 @@ class Kelas extends CI_Controller {
 	function edit($id) {
 		$data['guru'] = $this->kelas_m->getGuruProfile($id);
 		$this->session->set_flashdata('activemenu','kelas');
- 	   	$this->load->view('keals_edit',$data);
+ 	   	$this->load->view('kelas_edit',$data);
 	}
 
 	function update() {

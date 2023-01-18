@@ -14,13 +14,13 @@ class Profil extends CI_Controller {
 
 	public function update(){
 		$updateprofil = array();
-		$nip = $this->input->post('nip');
+		$id = $this->session->id_guru;
 		$nama_dosen = $this->input->post('nama_dosen');
 		$password = $this->input->post('password');
 		$password2 = $this->input->post('password2');
-		if ((!empty($nip) && !empty($nama_dosen) && !empty($password) && !empty($password2)) && ($password == $password2) ) {
+		if ((!empty($nama_dosen) && !empty($password) && !empty($password2)) && ($password == $password2) ) {
 			$data = array(
-			   	'nama_dosen' => $nama_dosen,
+			   	'nama_guru' => $nama_dosen,
 			   	'password' => md5($password)
 			);
 			$updateprofil = array(
@@ -29,7 +29,7 @@ class Profil extends CI_Controller {
         		'pesan3' =>	'Sukses!',
         		'pesan4' =>	'btn btn-success'
         	);
-			$this->DosenM->update_profil($data, $nip);
+			$this->DosenM->update_profil($data, $id);
 		} else {
 			$updateprofil = array(
         		'pesan1' =>	'Gagal memperbarui informasi akun', 

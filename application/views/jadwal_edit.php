@@ -44,7 +44,7 @@
                                                 <select name="nip" id="nip" class="form-control">
                                                     <option value="">Pilih Guru</option>
                                                     <?php foreach ($guru as $ke) : ?>
-                                                        <option <?php if($guru1->nip == $ke->nip) {echo 'selected';} ?> value="<?php echo $ke->nip ?>"><?php echo $ke->nama_guru ?></option>
+                                                        <option <?php if($guru1->id_guru == $ke->id_guru) {echo 'selected';} ?> value="<?php echo $ke->id_guru ?>"><?php echo $ke->nama_guru ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
 											</div>

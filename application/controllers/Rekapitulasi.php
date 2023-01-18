@@ -11,8 +11,8 @@ class Rekapitulasi extends CI_Controller {
 	public function index()
 	{
 		$this->session->set_flashdata('activemenu','rekapitulasi');
-		$data['rekap'] = $this->AbsenM->tampil_rekapitulasi($this->session->nip);
-		$data['kelas'] = $this->AbsenM->info_kelas($this->session->nip);
+		$data['rekap'] = $this->AbsenM->tampil_rekapitulasi($this->session->id_guru);
+		$data['kelas'] = $this->AbsenM->info_kelas($this->session->id_guru);
  	   	$this->load->view('rekapitulasi',$data);
 	}
 
@@ -20,6 +20,7 @@ class Rekapitulasi extends CI_Controller {
 	{
 		if (!empty($_POST['kelas'])) {
 		$kelas = $_POST['kelas'];
+		$data ['kelas'] = $this->db->query("SELECT * FROM tbkelas where id_kelas = $kelas")->row();
 		$data['cetak'] = $this->AbsenM->cetak_rekapitulasi($kelas);
     	$this->load->view('cetak_rekapitulasi',$data);
     	}else {

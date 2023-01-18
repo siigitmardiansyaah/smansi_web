@@ -32,7 +32,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-head-row card-tools-still-right">
-										<h4 class="card-title">Informasi Akun</h4>
+										<h4 class="card-title">Informasi Guru</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -41,7 +41,7 @@
 										<div class="col">
 											<div class="form-group">
 												<label>Nomor Induk Pegawai</label>
-													<input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai" />
+												<input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai" />
 											</div>
 											<div class="form-group">
 												<label>Nama Lengkap</label>
@@ -55,7 +55,7 @@
 												<input type="password" class="form-control" id="password" name="password" placeholder="Masukkan kata sandi Anda">
 											</div>
 											<div class="form-group float-right">
-												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Ubah</button>
+												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Simpan</button>
 												<span style="padding: 5px"></span>
 											</div>
 										</div>

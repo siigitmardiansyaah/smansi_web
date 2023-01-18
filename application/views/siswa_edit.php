@@ -41,7 +41,8 @@
 										<div class="col">
 											<div class="form-group">
                                             <label>NIS Siswa</label>
-													<input type="text" class="form-control" name="id" placeholder="Nomor Induk Siswa" value="<?php echo $guru->nis?>"/>
+													<input type="hidden" class="form-control" name="id" placeholder="Nomor Induk Siswa" value="<?php echo $guru->id_siswa?>"/>
+													<input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa" value="<?php echo $guru->nis?>"/>
 											</div>
 											<div class="form-group">
 												<label>Nama Siswa</label>

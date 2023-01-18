@@ -20,9 +20,11 @@ class Guru extends CI_Controller {
 	}
 
 	function store() {
+		$nip = $this->input->post('nip');
 		$nama = $this->input->post('nama');
 		$password = md5($this->input->post('password'));
 		$data = array(
+			'nip' => $nip,
 			'nama_guru' => $nama,
 			'password' => $password
 		);
@@ -49,12 +51,19 @@ class Guru extends CI_Controller {
 	}
 
 	function update() {
+		$id = $this->input->post('id');
+		$nip = $this->input->post('nip');
 		$nama = $this->input->post('nama');
-		$id = $this->input->post('nip');
 		$password = md5($this->input->post('password'));
+		$data = array(
+			'nip' => $nip,
+			'nama_guru' => $nama,
+			'password' => $password
+		);
 		
 		if(strlen($this->input->post('password')) < 1) {
 			$data = array(
+				'nip' => $nip,
 				'nama_guru' => $nama,
 			);
 			$query = $this->guru_m->update($data,$id);
@@ -67,6 +76,7 @@ class Guru extends CI_Controller {
 			}
 		} else {
 			$data = array(
+				'nip' => $nip,
 				'nama_guru' => $nama,
 				'password' => $password
 			);

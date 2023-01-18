@@ -43,7 +43,7 @@
 														<?php foreach ($mahasiswa as $m) :?>
 														<div class="col-7 col-stats">
 															<div class="numbers">
-																<p class="card-category">Mahasiswa</p>
+																<p class="card-category">Siswa</p>
 																<h4 class="card-title"><?php  echo $m['mhs'] ?></h4>
 														<?php endforeach; ?>
 															</div>
@@ -149,11 +149,7 @@
 		$.notify({
 			icon: 'flaticon-alarm-1',
 			title: 'Halo, <?php echo $this->session->nama_dosen ?>!',
-<<<<<<< HEAD
 			message: 'Selamat datang di SMANSI WEB',
-=======
-			message: 'Selamat datang di SENSASIQ',
->>>>>>> d1b8c56b57908e07ede54c3c7ccada25c9bcf72c
 		},{
 			type: 'info',
 			placement: {

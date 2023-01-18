@@ -26,8 +26,8 @@ class Siswa extends CI_Controller {
 		$id_kelas = $this->input->post('id_kelas');
 		$no_wa = $this->input->post('no_wa');
 		$data = array(
-			'nis' => $nama,
-			'nama' => $password,
+			'nis' => $nis,
+			'nama' => $nama,
             'id_kelas' => $id_kelas,
             'no_wa' => $no_wa,
 		);
@@ -50,14 +50,14 @@ class Siswa extends CI_Controller {
 	}
 
 	function update() {
-		$id = $this->input->post('nip');
+		$id = $this->input->post('id');
         $nama = $this->input->post('nama');
 		$nis = $this->input->post('nis');
 		$id_kelas = $this->input->post('id_kelas');	
 		$no_wa = $this->input->post('no_wa');	
 			$data = array(
-				'nis' => $nama,
-				'nama' => $password,
+				'nis' => $nis,
+				'nama' => $nama,
 				'id_kelas' => $id_kelas,
 				'no_wa' => $no_wa,
 			);

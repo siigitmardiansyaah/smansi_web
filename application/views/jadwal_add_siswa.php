@@ -60,7 +60,7 @@
 											</div>
 										<div class="col">
 											<div class="form-group float-right">
-												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Ubah</button>
+												<button type="submit" value="Kirim" name="btnUbah" class="btn btn-primary">Simpan</button>
 												<span style="padding: 5px"></span>
 											</div>
 										</div>

@@ -38,6 +38,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-body">
+									<a href="<?php echo base_url('koreksi_absen/add') ?>/<?php echo $kelas ?>" class="btn btn-primary">Tambah</a>
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
@@ -46,6 +47,8 @@
 													<th>Nama Siswa</th>
                                                     <th>Mata Pelajaran</th>
 													<th>Kelas</th>
+													<th>Tanggal Absen</th>
+													<th>Keterangan</th>
                                                     <th>Aksi</th>
 												</tr>
 											</thead>
@@ -55,6 +58,8 @@
 													<th>Nama Siswa</th>
 													<th>Mata Pelajaran</th>
 													<th>Kelas</th>
+													<th>Tanggal Absen</th>
+													<th?>Keterangan</th>
                                                     <th>Aksi</th>
 												</tr>
 											</tfoot>
@@ -67,7 +72,9 @@
 													<td><?php echo $datajadwal['nama']; ?></td>
 								                    <td><?php echo $datajadwal['nama_mapel']; ?></td>
 								                    <td><?php echo $datajadwal['nama_kelas']; ?></td>
-                                                    <td><a href='<?php echo base_url()?>koreksi_absen/update_kehadiran/<?php echo $datajadwal['id_siswa'] ?> ' data-toggle='tooltip' title='Koreksi Kehadiran'><i class='fas fa-edit'></i></a></td>
+								                    <td><?php echo date('d/m/Y H:i',strtotime($datajadwal['waktu_absen'])); ?></td>
+								                    <td><?php echo $datajadwal['keterangan']; ?></td>
+                                                    <td><a href='<?php echo base_url()?>koreksi_absen/update_kehadiran/<?php echo $datajadwal['id_siswa'].'/'.$datajadwal['id_qr'] ?> ' data-toggle='tooltip' title='Koreksi Kehadiran'><i class='fas fa-edit'></i></a></td>
 												</tr>
 												<?php endforeach; ?>
 											</tbody>

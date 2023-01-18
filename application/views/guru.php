@@ -65,7 +65,7 @@
                                                     <td><?php echo $no++ ?></td>
 													<td><?php echo $gu->nip; ?></td>
 								                    <td><?php echo $gu->nama_guru ?></td>
-								                    <td><a href="<?php echo base_url('guru') ?>/edit/<?php echo $gu->nip ?>" class="btn btn-primary">Edit</a> <a href="<?php echo base_url('guru') ?>/hapus/<?php echo $gu->nip ?>" class="btn btn-warning">Hapus</a></td>
+								                    <td><a href="<?php echo base_url('guru') ?>/edit/<?php echo $gu->id_guru ?>" class="btn btn-primary">Edit</a> <a href="<?php echo base_url('guru') ?>/hapus/<?php echo $gu->id_guru ?>" class="btn btn-warning">Hapus</a></td>
 												</tr>
 												<?php endforeach; ?>
 											</tbody>

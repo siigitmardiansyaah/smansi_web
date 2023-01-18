@@ -20,7 +20,7 @@ class JadwalM extends CI_Model{
       $data = array(
         "id_mapel"=>$id_mapel,
         "id_kelas"=>$id_kelas,
-        "nip"=>$nip,
+        "id_guru"=>$nip,
         "waktu"=>$waktu
       );
       $insert = $this->db->insert("tbjadwal", $data);
@@ -80,14 +80,14 @@ class JadwalM extends CI_Model{
     if($nis == ''){
       return $this->empty_response();
     }else{
-      $this->db->select('tbmapel.nama_mapel as nama_mapel, tbjadwal.waktu as waktu, tbguru.nama_dosen as nama_dosen');
+      $this->db->select('tbmapel.nama_mapel as nama_mapel, tbjadwal.waktu as waktu, tbguru.nama_guru as nama_dosen');
       $this->db->group_by('nama_mapel');
       $this->db->from('tbjadwal');
       $this->db->join('tbkelas', 'tbkelas.id_kelas = tbjadwal.id_kelas');
       $this->db->join('tbsiswa', 'tbsiswa.id_kelas = tbjadwal.id_kelas');
-      $this->db->join('tbguru', 'tbguru.nip = tbjadwal.nip');
+      $this->db->join('tbguru', 'tbguru.id_guru = tbjadwal.id_guru');
       $this->db->join('tbmapel', 'tbmapel.id_mapel = tbjadwal.id_mapel');
-      $this->db->where('tbsiswa.nis', $nis);
+      $this->db->where('tbsiswa.id_siswa', $nis);
       $theid = $this->db->get()->result();
       if($theid){
         return $theid;
@@ -136,7 +136,7 @@ class JadwalM extends CI_Model{
       $set = array(
         "id_mapel"=>$id_mapel,
         "id_kelas"=>$id_kelas,
-        "nip"=>$nip,
+        "id_guru"=>$nip,
         "waktu"=>$waktu
       );
       $this->db->where($where);
@@ -164,9 +164,9 @@ class JadwalM extends CI_Model{
     $this->db->order_by('waktu', 'ASC');
     $this->db->from('tbjadwal');
     $this->db->join('tbkelas', 'tbkelas.id_kelas = tbjadwal.id_kelas');
-    $this->db->join('tbguru', 'tbguru.nip = tbjadwal.nip');
+    $this->db->join('tbguru', 'tbguru.id_guru = tbjadwal.id_guru');
     $this->db->join('tbmapel', 'tbmapel.id_mapel = tbjadwal.id_mapel');
-    $this->db->where('tbjadwal.nip', $nip);
+    $this->db->where('tbjadwal.id_guru', $nip);
     $result = $this->db->get();
     return $result->result_array();
   }
@@ -176,7 +176,7 @@ class JadwalM extends CI_Model{
     $this->db->order_by('waktu', 'ASC');
     $this->db->from('tbjadwal');
     $this->db->join('tbkelas', 'tbkelas.id_kelas = tbjadwal.id_kelas');
-    $this->db->join('tbguru', 'tbguru.nip = tbjadwal.nip');
+    $this->db->join('tbguru', 'tbguru.id_guru = tbjadwal.id_guru');
     $this->db->join('tbmapel', 'tbmapel.id_mapel = tbjadwal.id_mapel');
     $result = $this->db->get();
     return $result->result_array();
@@ -184,11 +184,11 @@ class JadwalM extends CI_Model{
 
   //menampilkan jadwal berdasarkan id_jadwal untuk update
   public function tampil_jadwal_update($id_jadwal){
-    $this->db->select('tbjadwal.id_jadwal as id_jadwal, tbjadwal.nip as nip, tbjadwal.waktu as waktu, tbkelas.nama_kelas as nama_kelas, tbmapel.nama_mapel as nama_mapel, tbmapel.id_mapel as id_mapel');
+    $this->db->select('tbjadwal.id_jadwal as id_jadwal, tbjadwal.id_guru as nip, tbjadwal.waktu as waktu, tbkelas.nama_kelas as nama_kelas, tbmapel.nama_mapel as nama_mapel, tbmapel.id_mapel as id_mapel');
     $this->db->order_by('waktu', 'ASC');
     $this->db->from('tbjadwal');
     $this->db->join('tbkelas', 'tbkelas.id_kelas = tbjadwal.id_kelas');
-    $this->db->join('tbguru', 'tbguru.nip = tbjadwal.nip');
+    $this->db->join('tbguru', 'tbguru.id_guru = tbjadwal.id_guru');
     $this->db->join('tbmapel', 'tbmapel.id_mapel = tbjadwal.id_mapel');
     $this->db->where('tbjadwal.id_jadwal', $id_jadwal);
     $result = $this->db->get();
@@ -203,9 +203,9 @@ class JadwalM extends CI_Model{
 
   //tapil data dashbord
   public function count($nip){    
-    $this->db->select('count(nip) as kelas, count(id_mapel) as matkul');
+    $this->db->select('count(id_guru) as kelas, count(id_mapel) as matkul');
     $this->db->from('tbjadwal');
-    $this->db->where('nip',$nip);
+    $this->db->where('id_guru',$nip);
     $result = $this->db->get();
     return $result->result_array();
   }
@@ -214,7 +214,7 @@ class JadwalM extends CI_Model{
     $this->db->select('count(tbsiswa.nama) as mhs');
     $this->db->from('tbjadwal');
     $this->db->join('tbsiswa','tbsiswa.id_kelas = tbjadwal.id_kelas');
-    $this->db->where('tbjadwal.nip',$nip);
+    $this->db->where('tbjadwal.id_guru',$nip);
     $result = $this->db->get();
     return $result->result_array();
   }
@@ -225,16 +225,19 @@ class JadwalM extends CI_Model{
     $this->db->join('tbsiswa c','b.id_siswa = c.id_siswa');
     $this->db->join('tbkelas d','a.id_kelas = d.id_kelas');
     $this->db->join('tbmapel e','a.id_mapel = e.id_mapel');
+    $this->db->join('tbabsen f','c.id_siswa = f.id_siswa');
     $this->db->where('a.id_jadwal',$kelas);
-    $this->db->where('a.nip',$nip);
+    $this->db->where('a.id_guru',$nip);
+    $this->db->order_by('f.waktu_absen','DESC');
     $query = $this->db->get('tbjadwal a');
     return $query->result_array();
   }
 
   function getSiswa($id_siswa)
   {
-    $this->db->where('id_siswa',$id_siswa);
-    $query = $this->db->get('tbsiswa');
+    $this->db->join('tbabsen b','a.id_siswa = b.id_siswa');
+    $this->db->where('a.id_siswa',$id_siswa);
+    $query = $this->db->get('tbsiswa a');
     return $query->row();
   }
 
@@ -245,9 +248,17 @@ class JadwalM extends CI_Model{
     return $query->row();
   }
 
-  function Insert($data)
+  function Insert($data,$id_jadwal,$id_qr,$id_siswa)
   {
-    $this->db->insert('tbabsen', $data);
+    $this->db->where('id_jadwal',$id_jadwal);
+    $this->db->where('id_qr',$id_qr);
+    $this->db->where('id_siswa',$id_siswa);
+    $this->db->update('tbabsen', $data);
+    return true;
+  }
+
+  function Insert1($data) {
+    $this->db->insert('tbabsen',$data);
     return true;
   }
 }
