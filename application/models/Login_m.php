@@ -36,6 +36,7 @@ class Login_m extends CI_Model {
             if($query1){
                 $response['status']=200;
                 $response['error']=false;
+                $response['message']='Data Siswa.';
                 $response['login']=[
                     'id_siswa' => $query1->id_siswa,
                     'nis' => $query1->nis,

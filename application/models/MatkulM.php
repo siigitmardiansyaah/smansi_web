@@ -14,10 +14,10 @@ class MatkulM extends CI_Model{
   public function all_matkul($id_siswa){
     $this->db->select("b.id_mapel,d.nama_mapel,c.nama_guru,e.nama_kelas, DATE_FORMAT(b.waktu, '%W, %H:%i') as waktu");
     $this->db->join('tbjadwal b','a.id_jadwal_guru = b. id_jadwal');
-    $this->db->join('tbguru c','b.nip = c.nip');
+    $this->db->join('tbguru c','b.id_guru = c.id_guru');
     $this->db->join('tbmapel d','b.id_mapel = d.id_mapel');
     $this->db->join('tbkelas e','b.id_kelas = e.id_kelas');
-    $this->db->where('id_siswa',$id_siswa);
+    $this->db->where('a.id_siswa',$id_siswa);
     $all = $this->db->get("tbjadwal_siswa a")->result();
     if($all) {
       $response['status']=200;

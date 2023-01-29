@@ -20,8 +20,8 @@ class AbsenM extends CI_Model{
     // LOKASI USER
 
     // LOKASI SEKOLAH
-      $lat_sekolah = (-6.257274282458042 * 3.14) / 180;
-      $long_sekolah = (107.04022572816815 * 3.14) / 180;
+      $lat_sekolah = (-6.256727 * 3.14) / 180;
+      $long_sekolah = (107.040846 * 3.14) / 180;
     // LOKASI SEKOLAH
 
     // RUMUS HARVERSINE
@@ -30,11 +30,10 @@ class AbsenM extends CI_Model{
       $a = (sin($lat / 2) * sin($lat / 2))  + cos($lat_user) * cos($lat_sekolah) * (sin($long/2) * sin($long/2));
       $c = 2 * asin(sqrt($a));
       $jarak = $radius_bumi * 2 * $c;
-      $banding = $jarak * 1000;
+      $banding = floor($jarak * 1000);
     // RUMUS HARVERSINE
 
-
-    if($banding > 0.005)
+    if($banding > 5)
     {
       $response['status']=502;
       $response['error']=true;
@@ -48,6 +47,7 @@ class AbsenM extends CI_Model{
       $hari_ini = date('l');
       $jam_sekarang = date('H:i:s');
       $query = $this->db->query("SELECT * from tbabsen where id_jadwal = $id_jadwal AND id_qr = $id_qr AND id_siswa = $id_siswa")->num_rows();
+      $cekSiswa = $this->db->query("SELECT * from tbjadwal_siswa where id_siswa = $id_siswa AND id_jadwal_guru = $id_jadwal")->row();
       if($query == 0)
       {
       if($hari != $hari_ini){
@@ -66,7 +66,13 @@ class AbsenM extends CI_Model{
         $response['error']=true;
         $response['message']='Tidak Bisa Absen Dikarenakan  Lebih dari Jam Absen';      
       }else if($hari == $hari_ini && $jam_sekarang > $jam_mulai && $jam_sekarang < $jam_selesai1){
-   $data = array(
+        if(empty($cekSiswa)) {
+          $response['status']=502;
+          $response['error']=true;
+          $response['message']='Anda Tidak Bisa Absen Karena Beda Guru';
+          return $response;
+        }else{
+          $data = array(
             "id_jadwal"=>$id_jadwal,
             "id_qr"=>$id_qr,
             "id_siswa"=>$id_siswa,
@@ -97,6 +103,7 @@ class AbsenM extends CI_Model{
             $response['message']='Data absen gagal ditambahkan.';
             return $response;
           }
+        }  
       }
       }else{
         $response['status']=502;
