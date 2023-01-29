@@ -27,7 +27,7 @@ class MatkulM extends CI_Model{
     }else{
       $response['status']=502;
       $response['error']=true;
-      $response['message']='Data Pelajaran Gagal Ditampilkan';
+      $response['message']= $all;
       return $response;
     }
 
