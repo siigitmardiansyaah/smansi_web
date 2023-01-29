@@ -100,7 +100,7 @@
                   <select name="kelas" class="form-control input-border-bottom" id="selectFloatingLabel" required>
                   <option value="">&nbsp;</option>
                   <?php foreach ($kelas as $k) : ?>
-                    <option value="<?php echo $k['id'] ?>"><?php echo $k['kelas'] ?></option>
+                    <option value="<?php echo $k['id'] ?>"><?php echo $k['nama_mapel'].' - '.$k['kelas'] ?></option>
                     <?php endforeach; ?>
                   </select>
                   <label for="selectFloatingLabel" class="placeholder">Kelas</label>

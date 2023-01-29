@@ -305,7 +305,7 @@ class AbsenM extends CI_Model{
   }
 
   public function info_kelas($nip){
-    $this->db->select('tbjadwal.id_kelas as id,tbkelas.nama_kelas as kelas');
+    $this->db->select('tbjadwal.id_kelas as id,tbkelas.nama_kelas as kelas,nama_mapel as nama_mapel');
     $this->db->from('tbjadwal');
     $this->db->join('tbkelas','tbkelas.id_kelas = tbjadwal.id_kelas');  
     $this->db->join('tbmapel','tbmapel.id_mapel = tbjadwal.id_mapel');

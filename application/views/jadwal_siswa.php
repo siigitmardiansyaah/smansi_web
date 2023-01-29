@@ -77,7 +77,7 @@
 								                    <td><?php echo $gu->nama_kelas ?></td>
 								                    <td><?php echo $gu->nama_mapel ?></td>
 								                    <td><?php echo date('d/m/Y H:i:s',strtotime($gu->waktu)) ?></td>
-								                    <td><a href="<?php echo base_url('jadwal') ?>/edit_siswa/<?php echo $gu->id_jadwalsiswa ?>" class="btn btn-primary">Edit</a> <a href="<?php echo base_url('jadwal') ?>/hapus_siswa/<?php echo $gu->id_jadwalsiswa ?>" class="btn btn-warning">Hapus</a></td>
+								                    <td><a href="<?php echo base_url('jadwal') ?>/edit_siswa/<?php echo $gu->id_jadwalsiswa ?>" class="btn btn-primary">Edit</a> <a href="<?php echo base_url('jadwal') ?>/hapus1/<?php echo $gu->id_jadwalsiswa ?>" class="btn btn-warning">Hapus</a></td>
 												</tr>
 												<?php endforeach; ?>
 											</tbody>
